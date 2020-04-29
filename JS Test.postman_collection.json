@@ -65,7 +65,7 @@
 							"",
 							"",
 							"pm.test(\"Status Ok\", function () {",
-							"    pm.expect(boardStatus).to.eql(\"oky\");",
+							"    pm.expect(boardStatus).to.eql(\"ok\");",
 							"});",
 							"",
 							"headerServer = pm.response.headers.get('Server')",
