@@ -1,0 +1,106 @@
+{
+	"info": {
+		"_postman_id": "fd4e505f-df57-4aae-984a-a306e1638a6f",
+		"name": "JS Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "de8e9786-cb2f-4a44-8212-715745cfd904",
+						"exec": [
+							"jsonData = pm.response.json();",
+							"filters = jsonData.filters;",
+							"for (const filter of filters) {",
+							"    if (filter.name === \"MANUFACTURER\") {",
+							"        manufactorerFilter = filter;",
+							"    }",
+							"}",
+							"",
+							"pm.test(\"Manufacturer Not Allowed\", function () {",
+							"    pm.expect(manufactorerFilter.isAllowed).to.eql(false);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://www.mocky.io/v2/5ab350d62f00005a00ca3663",
+					"protocol": "http",
+					"host": [
+						"www",
+						"mocky",
+						"io"
+					],
+					"path": [
+						"v2",
+						"5ab350d62f00005a00ca3663"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "958eb0eb-58f4-4b80-94fc-e0bb80019ecb",
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"for (var value in jsonData.limits) {",
+							"    if (jsonData.limits[value].hasOwnProperty(\"boards\")) {",
+							"        var boardStatus = jsonData.limits[value].boards.totalPerMember.status;",
+							"    }",
+							"}",
+							"",
+							"",
+							"pm.test(\"Status Ok\", function () {",
+							"    pm.expect(boardStatus).to.eql(\"ok\");",
+							"});",
+							"",
+							"headerServer = pm.response.headers.get('Server')",
+							"",
+							"pm.test(\"Server is correct\", function () {",
+							"    pm.expect(headerServer).to.eql(\"Cowboy\");",
+							"});",
+							"",
+							"pm.test(\"Cookies Empty\", function () {",
+							"pm.expect(pm.cookies.has('sessionId')).to.be.false;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://www.mocky.io/v2/5ab34d8c2f00006600ca3652",
+					"protocol": "http",
+					"host": [
+						"www",
+						"mocky",
+						"io"
+					],
+					"path": [
+						"v2",
+						"5ab34d8c2f00006600ca3652"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
